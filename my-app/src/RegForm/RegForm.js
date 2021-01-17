@@ -7,24 +7,40 @@ function RegForm() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  function onAdd() {
-    if (!localStorage.getItem(login)) {
-      const userData = {};
-      userData.login = login;
-      userData.password = password;
-      localStorage.setItem(`${login}`, JSON.stringify(userData));
+  function addUser() {
+    const database = JSON.parse(localStorage.getItem("database"));
+
+    const user = database.findIndex((item) => item.login === login);
+
+    if (user >= 0) {
+      alert(`User "${login}" already exist. Please, log in`);
       setLogin("");
       setPassword("");
     } else {
-      console.log("already is");
+      const userData = {};
+      userData.login = login;
+      userData.password = password;
+      userData.appList = [];
+
+      database.push(userData);
+      localStorage.clear();
+      localStorage.setItem(`database`, JSON.stringify(database));
+      alert("Done!")
+      setLogin("");
+      setPassword("");
     }
   }
 
   return (
-    <div className="regForm">
-      <Input value={login} label="Login" onChange={setLogin}></Input>
-      <Input type="password" value={password} label="Password" onChange={setPassword}></Input>
-      <Button onClick={onAdd}>Registration</Button>
+    <div className="regForm" >
+      <Input value={login} label="Username: " onChange={setLogin}></Input>
+      <Input
+        type="password"
+        value={password}
+        label="Password: "
+        onChange={setPassword}
+      ></Input>
+      <Button onClick={addUser}>Registration</Button>
     </div>
   );
 }
