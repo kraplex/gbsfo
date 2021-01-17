@@ -1,22 +1,30 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import RegForm from "../RegForm/RegForm";
 import DashBoard from "../DashBoard/DashBoard";
 import LogInForm from "../LogInForm/LogInForm";
-
 
 function App() {
   if (!localStorage.getItem("database")) {
     localStorage.setItem("database", JSON.stringify([]));
   }
 
-  const [regForm, setRegForm] = useState("")
+  const [name, setName] = useState("");
+  function showName(name) {
+    setName(name);
+  }
+
+  const [arr, setArr] = useState([]);  
+  function showArr(arr) {
+    setArr(arr);
+    console.log(arr)
+  }
 
   return (
     <div className="container">
-      <RegForm></RegForm>
-      {/* <LogInForm ></LogInForm>
-      <DashBoard userName={"text"}></DashBoard> */}
+      <RegForm showName={showName}></RegForm>
+      <LogInForm showName={showName} showArr={showArr}></LogInForm>
+      <DashBoard userName={name} arr={arr}></DashBoard>
     </div>
   );
 }

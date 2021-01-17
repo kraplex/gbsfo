@@ -3,37 +3,36 @@ import "./RegForm.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
-function RegForm() {
-  const [login, setLogin] = useState("");
+function RegForm({showName}) {
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   function addUser() {
     const database = JSON.parse(localStorage.getItem("database"));
-
-    const user = database.findIndex((item) => item.login === login);
-
+    const user = database.findIndex((item) => item.userName === userName);
+    
     if (user >= 0) {
-      alert(`User "${login}" already exist. Please, log in`);
-      setLogin("");
+      alert(`User "${userName}" already exist. Please, log in`);
+      setUserName("");
       setPassword("");
     } else {
+      showName(userName);
       const userData = {};
-      userData.login = login;
+      userData.userName = userName;
       userData.password = password;
       userData.appList = [];
-
       database.push(userData);
       localStorage.clear();
       localStorage.setItem(`database`, JSON.stringify(database));
       alert("Done!")
-      setLogin("");
+      setUserName("");
       setPassword("");
     }
   }
 
   return (
     <div className="regForm" >
-      <Input value={login} label="Username: " onChange={setLogin}></Input>
+      <Input value={userName} label="Username: " onChange={setUserName}></Input>
       <Input
         type="password"
         value={password}

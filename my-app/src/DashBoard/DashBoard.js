@@ -4,15 +4,23 @@ import Input from "../Input/Input";
 import List from "../List/List";
 import "./DashBoard.css";
 
-function DashBoard({userName}) {
+function DashBoard({userName, arr}) {
   const [application, setApplication] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState(""); 
-  const [appList, setAppList] = useState([]);
+  const [appList, setAppList] = useState(arr);
+  
 
   function onRemove(index) {
     const items = appList.filter((_, i) => i !== index);
     setAppList(items);
+    const database = JSON.parse(localStorage.getItem("database"));
+
+    const user = database.findIndex((item)=>item.userName===userName);
+    
+    database[user].appList.splice(index,1);
+    localStorage.clear();
+    localStorage.setItem("database", JSON.stringify(database))
   }
 
   function onEdit(index) {
@@ -21,12 +29,16 @@ function DashBoard({userName}) {
 
   function addUserData() {
     const database = JSON.parse(localStorage.getItem("database"));
+    const user = database.findIndex((item)=>item.userName===userName);
+    
     const applicationData = {};
     applicationData["application"] = application;
     applicationData["login"] = login;
     applicationData["password"] = password;
 
-    
+    database[user].appList.push(applicationData)
+    localStorage.clear();
+    localStorage.setItem("database", JSON.stringify(database))
       
 
     setAppList([...appList, applicationData]);

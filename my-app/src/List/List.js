@@ -14,7 +14,7 @@ function ListItem({ item, onRemove, onEdit, index }) {
   );
 }
 
-function List({ items, onRemove, onEdit, index }) {
+function List({ items, onRemove, onEdit }) {
   return (
     <ul>
       {items.map((item, index) => (
