@@ -14,18 +14,17 @@ function App() {
     setName(name);
   }
 
-  const [arr, setArr] = useState([]); 
-  
+  const [arr, setArr] = useState([]);
+
   function showArr(arr) {
-    setArr(arr);   
+    setArr(arr);
   }
- 
 
   return (
     <div className="container">
       <RegForm showName={showName}></RegForm>
       <LogInForm showName={showName} showArr={showArr}></LogInForm>
-      <DashBoard userName={name} arr={arr} showArr={showArr} ></DashBoard>
+      <DashBoard userName={name} arr={arr} showArr={showArr}></DashBoard>
     </div>
   );
 }

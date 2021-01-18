@@ -18,9 +18,8 @@ function LogInForm({ showName, showArr }) {
       alert("The username or password is not correct.");
     } else {
       showName(userName);
-      const user = dataBase.findIndex((item)=>item.userName===userName);
-      showArr(dataBase[user].appList)
-
+      const user = dataBase.findIndex((item) => item.userName === userName);
+      showArr(dataBase[user].appList);
     }
 
     setLogin("");

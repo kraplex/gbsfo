@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState} from "react";
 import Button from "../Button/Button";
+import Input from "../Input/Input";
 import "./List.css";
 
 function ListItem({ item, onRemove, onEdit, index }) {
+
+  
+
   return (
     <li className="list_item">
-      
-      <p>{item.application}</p>
-      <p>{item.login}</p>
-      <p>{item.password}</p>
+      <Input
+        value={item.application}
+        label="Application: "
+       ></Input>
+      <Input value={item.login} label="Login: "></Input>
+      <Input
+        value={item.password}
+        label="Password: "
+        onClick={(e) => (e.target.type = "text")}
+        type="password"
+      ></Input>
       <Button onClick={() => onEdit(index)}>Edit</Button>
       <Button onClick={() => onRemove(index)}>Remove</Button>
     </li>

@@ -9,6 +9,7 @@ function DashBoard({ userName, arr, showArr }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+
   function onRemove(index) {
     const dataBase = JSON.parse(localStorage.getItem("database"));
     const user = dataBase.findIndex((item) => item.userName === userName);
@@ -18,8 +19,8 @@ function DashBoard({ userName, arr, showArr }) {
     showArr(dataBase[user].appList);
   }
 
-  function onEdit(index) {
-    console.log(index, "edit");
+  function onEdit() {
+    console.log("edited")
   }
 
   function addUserData() {
@@ -46,20 +47,18 @@ function DashBoard({ userName, arr, showArr }) {
       <p>Welcome, {userName}</p>
       <p>Add new passwords:</p>
       <Input
-        placeholder="e-mail, facebook, etc"
+        placeholder="E-mail, facebook, etc"
         value={application}
-        label="for: "
+        label="For: "
         onChange={setApplication}
       ></Input>
       <Input
-        placeholder="Username, e-mail, phone number"
         value={login}
         label="Login: "
         onChange={setLogin}
       ></Input>
       <Input
         type="password"
-        placeholder="password"
         value={password}
         label="Password: "
         onChange={setPassword}
