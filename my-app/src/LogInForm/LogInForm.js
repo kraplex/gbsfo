@@ -8,9 +8,9 @@ function LogInForm({ showName, showArr }) {
   const [password, setPassword] = useState("");
 
   function logIn() {
-    const database = JSON.parse(localStorage.getItem("database"));
+    const dataBase = JSON.parse(localStorage.getItem("database"));
 
-    const user = database.findIndex(
+    const user = dataBase.findIndex(
       (item) => item.userName === userName && item.password === password
     );
 
@@ -18,9 +18,9 @@ function LogInForm({ showName, showArr }) {
       alert("The username or password is not correct.");
     } else {
       showName(userName);
-      const user = database.findIndex((item)=>item.userName===userName);
-      showArr(database[user].appList)
-      console.log(database[user].appList)
+      const user = dataBase.findIndex((item)=>item.userName===userName);
+      showArr(dataBase[user].appList)
+
     }
 
     setLogin("");

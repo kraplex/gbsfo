@@ -5,6 +5,7 @@ import "./List.css";
 function ListItem({ item, onRemove, onEdit, index }) {
   return (
     <li className="list_item">
+      
       <p>{item.application}</p>
       <p>{item.login}</p>
       <p>{item.password}</p>

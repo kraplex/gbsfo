@@ -4,23 +4,18 @@ import Input from "../Input/Input";
 import List from "../List/List";
 import "./DashBoard.css";
 
-function DashBoard({userName, arr}) {
+function DashBoard({ userName, arr, showArr }) {
   const [application, setApplication] = useState("");
   const [login, setLogin] = useState("");
-  const [password, setPassword] = useState(""); 
-  const [appList, setAppList] = useState(arr);
-  
+  const [password, setPassword] = useState("");
 
   function onRemove(index) {
-    const items = appList.filter((_, i) => i !== index);
-    setAppList(items);
-    const database = JSON.parse(localStorage.getItem("database"));
-
-    const user = database.findIndex((item)=>item.userName===userName);
-    
-    database[user].appList.splice(index,1);
+    const dataBase = JSON.parse(localStorage.getItem("database"));
+    const user = dataBase.findIndex((item) => item.userName === userName);
+    dataBase[user].appList.splice(index, 1);
     localStorage.clear();
-    localStorage.setItem("database", JSON.stringify(database))
+    localStorage.setItem("database", JSON.stringify(dataBase));
+    showArr(dataBase[user].appList);
   }
 
   function onEdit(index) {
@@ -28,20 +23,19 @@ function DashBoard({userName, arr}) {
   }
 
   function addUserData() {
-    const database = JSON.parse(localStorage.getItem("database"));
-    const user = database.findIndex((item)=>item.userName===userName);
-    
+    const dataBase = JSON.parse(localStorage.getItem("database"));
+    const user = dataBase.findIndex((item) => item.userName === userName);
+
     const applicationData = {};
     applicationData["application"] = application;
     applicationData["login"] = login;
     applicationData["password"] = password;
 
-    database[user].appList.push(applicationData)
+    dataBase[user].appList.push(applicationData);
     localStorage.clear();
-    localStorage.setItem("database", JSON.stringify(database))
-      
+    localStorage.setItem("database", JSON.stringify(dataBase));
 
-    setAppList([...appList, applicationData]);
+    showArr(dataBase[user].appList);
     setApplication("");
     setLogin("");
     setPassword("");
@@ -71,7 +65,7 @@ function DashBoard({userName, arr}) {
         onChange={setPassword}
       ></Input>
       <Button onClick={addUserData}>Add</Button>
-      <List items={appList} onRemove={onRemove} onEdit={onEdit}></List>
+      <List items={arr} onRemove={onRemove} onEdit={onEdit}></List>
     </div>
   );
 }
