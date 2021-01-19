@@ -21,7 +21,6 @@ function ListItem({ item, onRemove, onEdit, index }) {
         label="Password: "
         onClick={(e) => (e.target.type = "text")}
         type="password"
-        disabled
       ></Input>
       <Button onClick={() => onEdit(index)}>Edit</Button>
       <Button onClick={() => onRemove(index)}>Remove</Button>
