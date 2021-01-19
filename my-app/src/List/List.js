@@ -11,12 +11,13 @@ function ListItem({ item, onRemove, onEdit, index }) {
     <li className="list_item">
       <Input
         value={item.application}
+        disabled
         label="Application: "
         disabled
        ></Input>
       <Input value={item.login} label="Login: " disabled></Input>
       <Input
-        value={item.password}
+        value={item.password}        
         label="Password: "
         onClick={(e) => (e.target.type = "text")}
         type="password"
