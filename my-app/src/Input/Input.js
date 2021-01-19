@@ -11,7 +11,8 @@ function Input(props) {
         value={props.value}
         disabled={props.disabled}
         onChange={(e) => props.onChange(e.target.value)}
-        onClick={props.onClick}
+        onMouseOver ={props.onMouseOver }
+        onMouseOut = {props.onMouseOut}
       />
     </div>
   );

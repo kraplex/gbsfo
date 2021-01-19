@@ -9,20 +9,6 @@ function DashBoard({ userName, arr, showArr }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-
-  function onRemove(index) {
-    const dataBase = JSON.parse(localStorage.getItem("database"));
-    const user = dataBase.findIndex((item) => item.userName === userName);
-    dataBase[user].appList.splice(index, 1);
-    localStorage.clear();
-    localStorage.setItem("database", JSON.stringify(dataBase));
-    showArr(dataBase[user].appList);
-  }
-
-  function onEdit() {
-    console.log("edited")
-  }
-
   function addUserData() {
     const dataBase = JSON.parse(localStorage.getItem("database"));
     const user = dataBase.findIndex((item) => item.userName === userName);
@@ -64,7 +50,7 @@ function DashBoard({ userName, arr, showArr }) {
         onChange={setPassword}
       ></Input>
       <Button onClick={addUserData}>Add</Button>
-      <List items={arr} onRemove={onRemove} onEdit={onEdit}></List>
+      <List items={arr} userName={userName} arr={arr} showArr={showArr}></List>
     </div>
   );
 }
