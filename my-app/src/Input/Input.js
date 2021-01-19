@@ -9,6 +9,7 @@ function Input(props) {
         type={props.type || "text"}
         placeholder={props.placeholder || ""}
         value={props.value}
+        disabled={props.disabled}
         onChange={(e) => props.onChange(e.target.value)}
         onClick={props.onClick}
       />
