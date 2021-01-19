@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./LogInForm.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import DashBoard from "../DashBoard/DashBoard";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function LogInForm({ showName, showArr }) {
+function LogInForm({ showName, showArr, name, arr }) {
   const [userName, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,16 +29,30 @@ function LogInForm({ showName, showArr }) {
   }
 
   return (
-    <div className="logInForm">
-      <Input value={userName} label="Username: " onChange={setLogin}></Input>
-      <Input
-        type="password"
-        value={password}
-        label="Password: "
-        onChange={setPassword}
-      ></Input>
-      <Button onClick={logIn}>Log In</Button>
-    </div>
+    <Router>
+      <div className="logInForm">
+        <Input value={userName} label="Username: " onChange={setLogin}></Input>
+        <Input
+          type="password"
+          value={password}
+          label="Password: "
+          onChange={setPassword}
+        ></Input>
+        <Link to="dashboard">
+          <Button onClick={() => logIn()}>Log In</Button>
+        </Link>
+        <Switch>
+          <Route path="/dashboard">
+            <DashBoard
+              userName={name}
+              arr={arr}
+              showArr={showArr}
+              showName={showName}
+            ></DashBoard>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 export default LogInForm;

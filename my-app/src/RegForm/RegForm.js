@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./RegForm.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import DashBoard from "../DashBoard/DashBoard"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function RegForm({ showName }) {
+function RegForm({ showName, name, arr, showArr }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,16 +33,29 @@ function RegForm({ showName }) {
   }
 
   return (
-    <div className="regForm">
-      <Input value={userName} label="Username: " onChange={setUserName}></Input>
-      <Input
-        type="password"
-        value={password}
-        label="Password: "
-        onChange={setPassword}
-      ></Input>
-      <Button onClick={addUser}>Registration</Button>
-    </div>
+    <Router>
+      <div className="regForm">
+        <Input
+          value={userName}
+          label="Username: "
+          onChange={setUserName}
+        ></Input>
+        <Input
+          type="password"
+          value={password}
+          label="Password: "
+          onChange={setPassword}
+        ></Input>
+        <Link to="/dashboard">
+          <Button onClick={addUser}>Registration</Button>
+        </Link>
+        <Switch>
+          <Route path="/dashboard">
+            <DashBoard userName={name} arr={arr} showArr={showArr}></DashBoard>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 export default RegForm;

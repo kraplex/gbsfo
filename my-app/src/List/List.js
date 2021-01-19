@@ -12,13 +12,15 @@ function ListItem({ item, onRemove, onEdit, index }) {
       <Input
         value={item.application}
         label="Application: "
+        disabled
        ></Input>
-      <Input value={item.login} label="Login: "></Input>
+      <Input value={item.login} label="Login: " disabled></Input>
       <Input
         value={item.password}
         label="Password: "
         onClick={(e) => (e.target.type = "text")}
         type="password"
+        disabled
       ></Input>
       <Button onClick={() => onEdit(index)}>Edit</Button>
       <Button onClick={() => onRemove(index)}>Remove</Button>
