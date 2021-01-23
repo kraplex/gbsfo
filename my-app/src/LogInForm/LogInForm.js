@@ -38,7 +38,7 @@ function LogInForm({ showName, showArr, name, arr }) {
           label="Password: "
           onChange={setPassword}
         ></Input>
-        <Link to="dashboard">
+        <Link to="/dashboard">
           <Button onClick={() => logIn()}>Log In</Button>
         </Link>
         <Switch>

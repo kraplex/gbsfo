@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import "./List.css";
 
-function ListItem({ item, onRemove, onEdit, index }) {
+function ListItem({ item, onRemove, index, userName }) {
+  const [editedAppValue, setEditedAppValue] = useState(item.application);
+  const [editedLoginValue, setEditedLoginValue] = useState(item.login);
+  const [editedPassValue, setEditedPassValue] = useState(item.password);
+
+
+
+  function onEdit(index) {
+    const dataBase = JSON.parse(localStorage.getItem("database"));
+    const user = dataBase.findIndex((item) => item.userName === userName);
+    
+    const applicationData = {};
+    applicationData["application"] = editedAppValue;
+    applicationData["login"] = editedLoginValue;
+    applicationData["password"] = editedPassValue;
+    
+    dataBase[user].appList.splice(index, 1);
+    dataBase[user].appList.push(applicationData);
+    localStorage.setItem("database", JSON.stringify(dataBase));
+  }
+
   return (
     <li className="list_item">
-      <Input value={item.application} disabled label="Application: "></Input>
-      <Input value={item.login} label="Login: " disabled></Input>
       <Input
-        value={item.password}
-        disabled
+        value={editedAppValue}
+        label="Application: "
+        onChange={setEditedAppValue}
+      ></Input>
+      <Input value={editedLoginValue} label="Login: " onChange={setEditedLoginValue} ></Input>
+      <Input
+        value={editedPassValue}
         label="Password: "
+        onChange={setEditedPassValue}
         onMouseOver={(e) => (e.target.type = "text")}
         onMouseOut={(e) => (e.target.type = "password")}
         type="password"
@@ -32,18 +56,14 @@ function List({ items, userName, showArr }) {
     showArr(dataBase[user].appList);
   }
 
-  function onEdit() {
-    console.log("edited");
-  }
-
   return (
     <ul>
       {items.map((item, index) => (
         <ListItem
+          userName={userName}
           key={index}
           item={item}
           onRemove={onRemove}
-          onEdit={onEdit}
           index={index}
         ></ListItem>
       ))}

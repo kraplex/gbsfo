@@ -28,7 +28,7 @@ function App() {
             <Link to="/">Registration</Link>
           </li>
           <li>
-            <Link to="/login">Log In</Link>
+            <Link to="/login" >Log In</Link>
           </li>
           <li>
             <a href="/">Refresh all project</a>
@@ -46,10 +46,7 @@ function App() {
             <DashBoard userName={name} arr={arr} showArr={showArr} showName={showName}></DashBoard>
           </Route>          
         </Switch>
-        {/* <RegForm showName={showName}></RegForm>
-            <LogInForm showName={showName} showArr={showArr}></LogInForm>
-            <DashBoard userName={name} arr={arr} showArr={showArr}></DashBoard> */}
-      </div>
+        </div>
     </Router>
   );
 }
